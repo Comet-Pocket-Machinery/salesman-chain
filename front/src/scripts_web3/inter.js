@@ -17,7 +17,7 @@ const eventosContract = new web3.eth.Contract(contract.abi, CONTRACT_ADDRESS);
 
 
 
-async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto) {
+export async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
     const gasEstimate = await eventosContract.methods.crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto).estimateGas(); // estimate gas
     const tx = {
@@ -44,7 +44,7 @@ async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBolet
     });
 }
 
-async function comprarBoleto(id_evento) {
+export async function comprarBoleto(id_evento) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
     const gasEstimate = await eventosContract.methods.comprarBoleto(id_evento).estimateGas(); // estimate gas
     const tx = {
@@ -116,20 +116,31 @@ async function getCantidadEventos() {
 
 
 
-async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket){
-      await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
+async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket) {
+    await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
 }
 
+<<<<<<< HEAD:front/scripts_web3/inter.js
 async function getTodosLosEventosFrontend(){
     return eventosContract.methods.getTodosLosEventos().call();
    
 }
 async function getBoletosRestantesPorUsuarioFrontend(id_evento){
     return eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
+=======
+async function getTodosLosEventosFrontend() {
+    const message1 = eventosContract.methods.getTodosLosEventos().call();
+    await message1;
+    return message1;
+}
+async function getBoletosRestantesPorUsuarioFrontend(id_evento) {
+    const message1 = await eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
+>>>>>>> cf18e57b7a7819a0133df6489b682fc32dadc651:front/src/scripts_web3/inter.js
 
     
 }
 
+<<<<<<< HEAD:front/scripts_web3/inter.js
 async function getBoletosRestantesDelEventoFrontend(indiceDelEvento){
     return eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
 
@@ -139,22 +150,39 @@ async function getBoletosRestantesDelEventoFrontend(indiceDelEvento){
 async function geEventosActivosJsonFrontend(){
     return eventosContract.methods.geEventosActivos1().call();
   
+=======
+async function getBoletosRestantesDelEventoFrontend(indiceDelEvento) {
+    const message2 = await eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
+    return message2;
+}
+
+
+async function geEventosActivosJsonFrontend() {
+    const message2 = await eventosContract.methods.geEventosActivos1().call();
+    return message2;
+>>>>>>> cf18e57b7a7819a0133df6489b682fc32dadc651:front/src/scripts_web3/inter.js
 
 }
 
 
+<<<<<<< HEAD:front/scripts_web3/inter.js
 async function geEventosActivosIndiceFrontend(){
     return eventosContract.methods.geEventosActivos1().call();
 
+=======
+async function geEventosActivosIndiceFrontend() {
+    const message2 = await eventosContract.methods.geEventosActivos1().call();
+    return message2;
+>>>>>>> cf18e57b7a7819a0133df6489b682fc32dadc651:front/src/scripts_web3/inter.js
 }
 
-async function comprarBoletoDesdeFrontend(indiceDelEvento){
+async function comprarBoletoDesdeFrontend(indiceDelEvento) {
     await comprarBoleto(indiceDelEvento);
 }
 
-async function getCantidadEventosFrontend(){
-   return  eventosContract.methods.getCantidadEventos().call();
-    
+async function getCantidadEventosFrontend() {
+    return eventosContract.methods.getCantidadEventos().call();
+
 }
 
 
@@ -203,14 +231,6 @@ async function main() {
 
 main();
 
+export default { crearEvento, comprarBoleto };
 
-
-/**
- * await comprarBoleto(1);
- * crearEvento
- * 
- */
-
-
-// no funcionando
 

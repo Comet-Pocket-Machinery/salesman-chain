@@ -1,5 +1,5 @@
 <script>
-  import {}
+  
   	let questions = [
 		{ id: 1, text: `Pal norte` },
 		{ id: 2, text: `X next` },

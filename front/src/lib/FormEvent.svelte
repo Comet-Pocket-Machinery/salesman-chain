@@ -1,5 +1,12 @@
 <script>
-  
+  import {crearEvent}from "../scripts_web3/inter.js";
+  let nameEvent="";
+  let date=0;
+  let amountTicket=0;
+  let price=0;
+  function tosend(){
+crearEvent(amountTicket, nameEvent, date, price);
+  }
 </script>
 <style>
   .card{
@@ -25,13 +32,13 @@ border: transparent;
   }
 </style>
 <div class="card">
-  <input type="text" placeholder="Name event"><br>
-  <input type="number" placeholder="Date evento"><br>
-  <input type="number" placeholder="Amount tickets"><br>
-    <input type="number" placeholder="ticket price"><br>
+  <input value="{nameEvent}" type="text" placeholder="Name event"><br>
+  <input value="{date}" type="number" placeholder="Date evento"><br>
+  <input value="{amountTicket}"type="number" placeholder="Amount tickets"><br>
+    <input value="{price}" type="number" placeholder="ticket price"><br>
 
   <div>
-<button>
+<button on:click="{tosend}">
   Create
 </button>
 </div>
