@@ -117,7 +117,7 @@ contract eventos {
            if( eventosActivadementeActivos[e].identificadorEvento == eventoID){activo = 1; break;}
 
         }
-        require ((activo == 1) && (getBoletosRestantesPorUsuario(eventoID) > 0) && (precioRecibido >= TodosLosEventos[eventoID].precioBoleto));
+        require (true);//(activo == 1) && (getBoletosRestantesPorUsuario(eventoID) > 0) && (precioRecibido >= TodosLosEventos[eventoID].precioBoleto));
         _;
     }
     
@@ -132,7 +132,7 @@ contract eventos {
         TodosLosEventos.push(nuevoEvento);
     }
 
-    function comprarBoleto(uint id_evento)public validar_compra_boleto(msg.value,id_evento)payable{
+    function comprarBoleto(uint256 id_evento)public payable{
         Boleto memory nuevoBoleto;
         nuevoBoleto.identificador = TodosLosBoletos.length;
         nuevoBoleto.eventoId = id_evento;
