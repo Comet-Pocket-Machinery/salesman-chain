@@ -1,5 +1,5 @@
 
-const API_KEY = "0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
+//const API_KEY = "0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
 const CONTRACT_ADDRESS = "0x443f1a7CaC8a25bb28136e0cd1d0E3690418b8C3"; /////// 
 const API_URL = "https://eth-goerli.g.alchemy.com/v2/0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
 const PUBLIC_KEY = "0xa1116dc51c64f3DD77be3f199DfdDB4362B1D1Cf";
@@ -51,7 +51,7 @@ export async function comprarBoleto(id_evento) {
         'from': PUBLIC_KEY,
         'to': CONTRACT_ADDRESS,
         'nonce': nonce,
-        'gas':  Math.round(gasEstimate*1.40),
+        'gas': Math.round(gasEstimate * 1.40),
         'data': eventosContract.methods.comprarBoleto(id_evento).encodeABI()
     };
 
@@ -80,7 +80,7 @@ async function getBoletosRestantesPorUsuario(id_evento) {
     const message2 = await eventosContract.methods.getBoletosRestantesPorUsuario().call();
     console.log("The message is: " + message2);
 
-    return ;
+    return;
 
 
 }
@@ -95,7 +95,7 @@ async function getBoletosCompradosPorUsuarioContador() {
     const message2 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
     console.log("The message is: " + message2);
 
-    return ;
+    return;
 }
 
 ///getCantidadEventos()
@@ -108,7 +108,7 @@ async function getCantidadEventos() {
     const message2 = await eventosContract.methods.getCantidadEventos().call();
     console.log("The message is: " + message2);
 
-    return ;
+    return;
 }
 
 
@@ -120,60 +120,32 @@ async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, 
     await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
 }
 
-<<<<<<< HEAD:front/scripts_web3/inter.js
-async function getTodosLosEventosFrontend(){
-    return eventosContract.methods.getTodosLosEventos().call();
-   
-}
-async function getBoletosRestantesPorUsuarioFrontend(id_evento){
-    return eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
-=======
 async function getTodosLosEventosFrontend() {
-    const message1 = eventosContract.methods.getTodosLosEventos().call();
-    await message1;
-    return message1;
+    return eventosContract.methods.getTodosLosEventos().call();
+
 }
 async function getBoletosRestantesPorUsuarioFrontend(id_evento) {
-    const message1 = await eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
->>>>>>> cf18e57b7a7819a0133df6489b682fc32dadc651:front/src/scripts_web3/inter.js
+    return eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
 
-    
+
 }
 
-<<<<<<< HEAD:front/scripts_web3/inter.js
-async function getBoletosRestantesDelEventoFrontend(indiceDelEvento){
+async function getBoletosRestantesDelEventoFrontend(indiceDelEvento) {
     return eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
 
 }
 
 
-async function geEventosActivosJsonFrontend(){
-    return eventosContract.methods.geEventosActivos1().call();
-  
-=======
-async function getBoletosRestantesDelEventoFrontend(indiceDelEvento) {
-    const message2 = await eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
-    return message2;
-}
-
-
 async function geEventosActivosJsonFrontend() {
-    const message2 = await eventosContract.methods.geEventosActivos1().call();
-    return message2;
->>>>>>> cf18e57b7a7819a0133df6489b682fc32dadc651:front/src/scripts_web3/inter.js
+    return eventosContract.methods.geEventosActivos1().call();
+
 
 }
 
 
-<<<<<<< HEAD:front/scripts_web3/inter.js
-async function geEventosActivosIndiceFrontend(){
+async function geEventosActivosIndiceFrontend() {
     return eventosContract.methods.geEventosActivos1().call();
 
-=======
-async function geEventosActivosIndiceFrontend() {
-    const message2 = await eventosContract.methods.geEventosActivos1().call();
-    return message2;
->>>>>>> cf18e57b7a7819a0133df6489b682fc32dadc651:front/src/scripts_web3/inter.js
 }
 
 async function comprarBoletoDesdeFrontend(indiceDelEvento) {
@@ -219,7 +191,7 @@ async function main() {
     // const boletosRestantesDeEventoX = await getBoletosRestantesDelEventoFrontend(3);
     // console.info(boletosRestantesDeEventoX);
 
-  
+
 
 
 
@@ -233,4 +205,12 @@ main();
 
 export default { crearEvento, comprarBoleto };
 
+/**
+ * await comprarBoleto(1);
+ * crearEvento
+ *
+ */
+
+
+// no funcionando
 
