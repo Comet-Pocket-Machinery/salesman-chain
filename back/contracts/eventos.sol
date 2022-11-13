@@ -1,8 +1,7 @@
-import "@openzeppelin/contracts/utils/Strings.sol";
 pragma solidity ^0.8.17;
 
 //SPDX-License-Identifier: MIT
-contract eventos {
+contract Coches {
     struct Evento{
         uint256 identificadorEvento;
         address organizador;
@@ -19,6 +18,28 @@ contract eventos {
     }
     Boleto[] TodosLosBoletos;
     Evento[] TodosLosEventos;
+
+    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
+        if (_i == 0) {
+            return "0";
+        }
+        uint j = _i;
+        uint len;
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint k = len;
+        while (_i != 0) {
+            k = k-1;
+            uint8 temp = (48 + uint8(_i - _i / 10 * 10));
+            bytes1 b1 = bytes1(temp);
+            bstr[k] = b1;
+            _i /= 10;
+        }
+        return string(bstr);
+    }
     
     modifier precio_filtro(uint256 precioRecibido, uint256 idEvento){
         require (precioRecibido >= TodosLosEventos[idEvento].precioBoleto);
@@ -140,7 +161,7 @@ contract eventos {
     function getDescripcionDeEvento(uint256 evento_id)public view returns (string memory){
 
        return string.concat("{",
-       "'nombreEvento': "," '",TodosLosEventos[evento_id].nombreEvento,"'," ,"'fechaEvento': "," '",Strings.toString(TodosLosEventos[evento_id].fechaEvento),"'," ,"'ticketsDisponibles': "," '",Strings.toString(TodosLosEventos[evento_id].ticketsDisponibles),"'," ,"'precioBoleto': "," '",Strings.toString(TodosLosEventos[evento_id].precioBoleto),"'," , "}");
+       "'nombreEvento': "," '",TodosLosEventos[evento_id].nombreEvento,"'," ,"'fechaEvento': "," '",uint2str(TodosLosEventos[evento_id].fechaEvento),"'," ,"'ticketsDisponibles': "," '",uint2str(TodosLosEventos[evento_id].ticketsDisponibles),"'," ,"'precioBoleto': "," '",uint2str(TodosLosEventos[evento_id].precioBoleto),"'," , "}");
 
 
     }
