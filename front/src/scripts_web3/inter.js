@@ -15,8 +15,6 @@ import contract from "./eventos.json" assert { type: "json" };
 const eventosContract = new web3.eth.Contract(contract.abi, CONTRACT_ADDRESS);
 
 
-
-
 export async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
     const gasEstimate = await eventosContract.methods.crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto).estimateGas(); // estimate gas

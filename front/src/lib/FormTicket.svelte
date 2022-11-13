@@ -1,5 +1,5 @@
 <script>
-  
+  import {comprarBoleto}from "../scripts_web3/inter.js";
   	let questions = [
 		{ id: 1, text: `Pal norte` },
 		{ id: 2, text: `X next` },
@@ -49,9 +49,9 @@ border: transparent;
 		{/each}
 	</select><br>
   
-  <input type="number" placeholder="Amount to buy"><br>
+
   <div>
-<button>
+<button on:click="{comprarBoleto}">
   Buy
 </button>
 </div>
