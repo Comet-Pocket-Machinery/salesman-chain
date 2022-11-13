@@ -7,7 +7,7 @@
 
 <main>
 
-  <h1>SalesMan Chain</h1>
+  <h1>SalesMan <span style="color: goldenrod;">Chain</span></h1>
     <FormEvent />
     <FormTicket />
   
