@@ -7,8 +7,8 @@ contract eventos {
         address organizador;
         string nombreEvento;
         uint256 fechaEvento;
-        uint32 ticketsDisponibles;
-        uint32 precioBoleto;   
+        uint256 ticketsDisponibles;
+        uint256 precioBoleto;   
     }
 
     struct Boleto{
@@ -41,20 +41,20 @@ contract eventos {
         return string(bstr);
     }
     
-    modifier precio_filtro(uint256 precioRecibido, uint256 idEvento){
-        require (precioRecibido >= TodosLosEventos[idEvento].precioBoleto);
-         _;
-    }
+    // modifier precio_filtro(uint256 precioRecibido, uint256 idEvento){
+    //     require (precioRecibido >= TodosLosEventos[idEvento].precioBoleto);
+    //      _;
+    // }
 
     modifier precio_evento_filtro(uint256 precioRecibido, uint256 precioEsperado){
-        require (precioRecibido >= precioEsperado);
+        require (precioRecibido >= 0);
          _;
     }
 
     function geEventosActivos() public view returns(Evento[] memory){
         Evento[]  memory  EventosActivos = new Evento[](TodosLosEventos.length);
         uint contadorActivos = 0;
-        for(uint32 e = 0; e < TodosLosEventos.length;e++){
+        for(uint256 e = 0; e < TodosLosEventos.length;e++){
             if(TodosLosEventos[e].fechaEvento >= block.timestamp){
 
                 EventosActivos[contadorActivos] = TodosLosEventos[e];
@@ -66,7 +66,7 @@ contract eventos {
     }
 
     function getBoletosRestantesPorUsuario(uint256 id_evento)public view returns(uint256){
-       uint32 contadorVecesRepetidas = 0;
+       uint256 contadorVecesRepetidas = 0;
        for(uint256 e = 0; e < TodosLosBoletos.length;e++){
            if(TodosLosBoletos[e].compradorBoleto == msg.sender && id_evento ==TodosLosBoletos[e].eventoId){
                contadorVecesRepetidas+=1;
@@ -78,7 +78,7 @@ contract eventos {
     }
 
     function getBoletosCompradosPorUsuarioContador() public view returns(uint256){
-       uint32 contadorVecesRepetidas = 0;
+       uint256 contadorVecesRepetidas = 0;
        for(uint256 e = 0; e < TodosLosBoletos.length;e++){
            if(TodosLosBoletos[e].compradorBoleto == msg.sender){
                contadorVecesRepetidas+=1;
@@ -90,7 +90,7 @@ contract eventos {
     function getBoletosCompradosPorUsuario()public view returns(Evento[] memory){
         uint256 boletosCompradosPorUsuario = getBoletosCompradosPorUsuarioContador();
         Evento[]  memory boletosComprados = new Evento[](boletosCompradosPorUsuario); 
-        uint32 contadorBoletos = 0;
+        uint256 contadorBoletos = 0;
        for(uint256 e = 0; e < TodosLosBoletos.length;e++){
            if(TodosLosBoletos[e].compradorBoleto == msg.sender){
                boletosComprados[contadorBoletos] = TodosLosEventos[ TodosLosBoletos[e].eventoId ] ;
@@ -105,7 +105,7 @@ contract eventos {
     modifier validar_compra_boleto(uint256 precioRecibido,uint256 eventoID){
 
         Evento[] memory eventosActivadementeActivos = geEventosActivos();
-        uint32 activo = 0;
+        uint256 activo = 0;
         for(uint256 e =0; e < eventosActivadementeActivos.length;e++){
            if( eventosActivadementeActivos[e].identificadorEvento == eventoID){activo = 1; break;}
 
@@ -114,7 +114,7 @@ contract eventos {
         _;
     }
     
-    function crearEvento(uint32 boletosACrear, string memory nombreEvento, uint256  fechaEvento, uint32 precioBoleto)public precio_evento_filtro(msg.value,boletosACrear) payable  {
+    function crearEvento(uint256 boletosACrear, string memory nombreEvento, uint256  fechaEvento, uint256 precioBoleto)public precio_evento_filtro(msg.value,boletosACrear) payable  {
         Evento memory nuevoEvento;
         nuevoEvento.identificadorEvento = TodosLosEventos.length;
         nuevoEvento.organizador = msg.sender;
@@ -142,14 +142,14 @@ contract eventos {
         return  TodosLosEventos;
     }
 
-    function getBoletosRestantesDelEvento(uint256 id_evento)public view returns(uint32){
+    function getBoletosRestantesDelEvento(uint256 id_evento)public view returns(uint256){
         return TodosLosEventos[id_evento].ticketsDisponibles;
 
     }
 
     function getCantidadEventosActivos() public view returns(uint256){
         uint contadorActivos = 0;
-        for(uint32 e = 0; e < TodosLosEventos.length;e++){
+        for(uint256 e = 0; e < TodosLosEventos.length;e++){
             if(TodosLosEventos[e].fechaEvento >= block.timestamp){
                 contadorActivos++;
             }
