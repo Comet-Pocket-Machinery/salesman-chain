@@ -1,6 +1,6 @@
 
 const API_KEY = "0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
-const CONTRACT_ADDRESS = "0xfFF0A06480c46cB49C78451589C91a0873b8dc61"; /////// 
+const CONTRACT_ADDRESS = "0x443f1a7CaC8a25bb28136e0cd1d0E3690418b8C3"; /////// 
 const API_URL = "https://eth-goerli.g.alchemy.com/v2/0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
 const PUBLIC_KEY = "0xa1116dc51c64f3DD77be3f199DfdDB4362B1D1Cf";
 const PRIVATE_KEY = "8c8cdfdd317327b48ae12db55dbbb75953e6f6546785b6a5e6084f20186a388a";
@@ -46,15 +46,13 @@ async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBolet
 
 async function comprarBoleto(id_evento) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
-    const gasEstimate = await eventosContract.methods.crearBoleto(id_evento).estimateGas(); // estimate gas
-    // Create the transaction
+    const gasEstimate = await eventosContract.methods.comprarBoleto(id_evento).estimateGas(); // estimate gas
     const tx = {
         'from': PUBLIC_KEY,
         'to': CONTRACT_ADDRESS,
         'nonce': nonce,
-        'gas': gasEstimate,
-        "gasLimit": 500000,
-        'data': eventosContract.methods.comprarBoleto(boletosACrear, nombreEvento, fechaEvento, precioBoleto).encodeABI()
+        'gas':  Math.round(gasEstimate*1.40),
+        'data': eventosContract.methods.comprarBoleto(id_evento).encodeABI()
     };
 
     // Sign the transaction
@@ -114,13 +112,20 @@ async function getCantidadEventos() {
 }
 
 async function main() {
-    const message1 = await eventosContract.methods.getCantidadEventos().call();
-    console.log("The message is: " + message1);
+    //  await crearEvento(42, "miky", 1857738793, 1);
 
-    await crearEvento(42, "miky", 188630, 1);
+    // const message1 = await eventosContract.methods.getTodosLosEventos().call();
+    // console.log("The message is: " + message1[0]);
+    await comprarBoleto(0);
 
-    const message2 = await eventosContract.methods.getCantidadEventos().call();
-    console.log("The message is: " + message2);
+    //  const message2 = await eventosContract.methods.getBoletosRestantesPorUsuario(0).call();
+    //  const message2 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
+
+    // console.log("The message is: " + message2);
+
+    console.info(message2);
+
+
 
 
 }
