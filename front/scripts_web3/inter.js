@@ -121,32 +121,31 @@ async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, 
 }
 
 async function getTodosLosEventosFrontend(){
-     message1 = eventosContract.methods.getTodosLosEventos().call();
-     await message1;
-     return message1;
+    return eventosContract.methods.getTodosLosEventos().call();
+   
 }
 async function getBoletosRestantesPorUsuarioFrontend(id_evento){
-    message1 =  await eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
+    return eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
 
-    return message1;
+    
 }
 
 async function getBoletosRestantesDelEventoFrontend(indiceDelEvento){
-    const message2 = await eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
-    return message2;
+    return eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
+
 }
 
 
 async function geEventosActivosJsonFrontend(){
-    const message2 = await eventosContract.methods.geEventosActivos1().call();
-    return message2;
+    return eventosContract.methods.geEventosActivos1().call();
+  
 
 }
 
 
 async function geEventosActivosIndiceFrontend(){
-    const message2 = await eventosContract.methods.geEventosActivos1().call();
-    return message2;
+    return eventosContract.methods.geEventosActivos1().call();
+
 }
 
 async function comprarBoletoDesdeFrontend(indiceDelEvento){
@@ -162,9 +161,37 @@ async function getCantidadEventosFrontend(){
 
 
 async function main() {
+    const crearEvento = await crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
 
-    const somethin = await getCantidadEventosFrontend();
-    console.info(somethin);
+
+    // const getTodosLosEventos = await getTodosLosEventosFrontend();
+    // console.info(getTodosLosEventos);
+
+
+
+    // const boletosRestantesEventoX = await getBoletosRestantesDelEventoFrontend(3);
+    // console.info(boletosRestantesEventoX);
+
+
+    // const getCantidadDeEventosTotal = await getCantidadEventosFrontend();
+    // console.info(getCantidadDeEventosTotal);
+
+    // const eventosIndicesActivos = await geEventosActivosIndiceFrontend();
+    // console.info(eventosIndicesActivos);
+
+
+    // const eventosActivosDetallados = await geEventosActivosJsonFrontend();
+    // console.info(eventosActivosDetallados);
+
+
+
+    // const comprarBoletos = await comprarBoletoDesdeFrontend(3);
+
+
+    // const boletosRestantesDeEventoX = await getBoletosRestantesDelEventoFrontend(3);
+    // console.info(boletosRestantesDeEventoX);
+
+  
 
 
 
