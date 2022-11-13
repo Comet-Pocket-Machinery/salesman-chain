@@ -40,18 +40,26 @@ contract eventos {
         }
         return string(bstr);
     }
-    
-    // modifier precio_filtro(uint256 precioRecibido, uint256 idEvento){
-    //     require (precioRecibido >= TodosLosEventos[idEvento].precioBoleto);
-    //      _;
-    // }
 
     modifier precio_evento_filtro(uint256 precioRecibido, uint256 precioEsperado){
         require (precioRecibido >= 0);
          _;
     }
 
-    function geEventosActivos() public view returns(Evento[] memory){
+    function geEventosActivos() public view returns(uint256[] memory){
+        uint256[]  memory  EventosActivos = new uint256[](getCantidadEventosActivos());
+        uint contadorActivos = 0;
+        for(uint256 e = 0; e < TodosLosEventos.length;e++){
+            if(TodosLosEventos[e].fechaEvento >= block.timestamp){
+                EventosActivos[contadorActivos] = e;
+                contadorActivos++;
+            }
+
+        }
+        return EventosActivos;
+    }
+
+    function geEventosActivos1() public view returns(Evento[] memory){
         Evento[]  memory  EventosActivos = new Evento[](TodosLosEventos.length);
         uint contadorActivos = 0;
         for(uint256 e = 0; e < TodosLosEventos.length;e++){
@@ -87,24 +95,23 @@ contract eventos {
        return contadorVecesRepetidas;
     }
 
-    function getBoletosCompradosPorUsuario()public view returns(Evento[] memory){
+    function getBoletosCompradosPorUsuario()public view returns(string[] memory){
         uint256 boletosCompradosPorUsuario = getBoletosCompradosPorUsuarioContador();
-        Evento[]  memory boletosComprados = new Evento[](boletosCompradosPorUsuario); 
+        string[]  memory boletosComprados = new string[](boletosCompradosPorUsuario); 
         uint256 contadorBoletos = 0;
        for(uint256 e = 0; e < TodosLosBoletos.length;e++){
            if(TodosLosBoletos[e].compradorBoleto == msg.sender){
-               boletosComprados[contadorBoletos] = TodosLosEventos[ TodosLosBoletos[e].eventoId ] ;
+               boletosComprados[contadorBoletos] = TodosLosEventos[TodosLosBoletos[e].eventoId].nombreEvento;
                contadorBoletos++;
            }
        }
 
        return boletosComprados;
-
     }
 
     modifier validar_compra_boleto(uint256 precioRecibido,uint256 eventoID){
 
-        Evento[] memory eventosActivadementeActivos = geEventosActivos();
+        Evento[] memory eventosActivadementeActivos = geEventosActivos1();
         uint256 activo = 0;
         for(uint256 e =0; e < eventosActivadementeActivos.length;e++){
            if( eventosActivadementeActivos[e].identificadorEvento == eventoID){activo = 1; break;}
@@ -138,8 +145,12 @@ contract eventos {
        return TodosLosEventos.length; 
     }  
 
-    function getTodosLosEventos()public view returns(Evento[] memory){
-        return  TodosLosEventos;
+    function getTodosLosEventos()public view returns(uint256[] memory){
+        uint256[]  memory  EventosActivos = new uint256[](getCantidadEventosActivos());
+        for(uint256 e = 0; e < TodosLosEventos.length;e++){
+            EventosActivos[e] = e;
+        }
+        return EventosActivos;
     }
 
     function getBoletosRestantesDelEvento(uint256 id_evento)public view returns(uint256){
