@@ -1,6 +1,6 @@
 
 const API_KEY = "0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
-const CONTRACT_ADDRESS = "0xe6F96B37e931Cea694B35cfA3F6bEcA0806AfB0D"; /////// 
+const CONTRACT_ADDRESS = "0xfFF0A06480c46cB49C78451589C91a0873b8dc61"; /////// 
 const API_URL = "https://eth-goerli.g.alchemy.com/v2/0zK3ljg6yvA4BNNMVVa8ubI3vQkhCYeo";
 const PUBLIC_KEY = "0xa1116dc51c64f3DD77be3f199DfdDB4362B1D1Cf";
 const PRIVATE_KEY = "8c8cdfdd317327b48ae12db55dbbb75953e6f6546785b6a5e6084f20186a388a";
@@ -20,7 +20,6 @@ const eventosContract = new web3.eth.Contract(contract.abi, CONTRACT_ADDRESS);
 async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
     const gasEstimate = await eventosContract.methods.crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto).estimateGas(); // estimate gas
-    // Create the transaction
     const tx = {
         'from': PUBLIC_KEY,
         'to': CONTRACT_ADDRESS,

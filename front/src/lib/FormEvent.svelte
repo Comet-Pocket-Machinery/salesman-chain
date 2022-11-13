@@ -26,8 +26,10 @@ border: transparent;
 </style>
 <div class="card">
   <input type="text" placeholder="Name event"><br>
-  <input type="text" placeholder="Date evento"><br>
-  <input type="text" placeholder="Amount tickets"><br>
+  <input type="number" placeholder="Date evento"><br>
+  <input type="number" placeholder="Amount tickets"><br>
+    <input type="number" placeholder="ticket price"><br>
+
   <div>
 <button>
   Create
