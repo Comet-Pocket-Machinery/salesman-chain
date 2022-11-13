@@ -188,7 +188,7 @@ async function getCantidadEventosFrontend() {
 
 
 
-async function main() {
+export async function main() {
     const crearEvento = await crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
 
 
@@ -204,8 +204,8 @@ async function main() {
     // const getCantidadDeEventosTotal = await getCantidadEventosFrontend();
     // console.info(getCantidadDeEventosTotal);
 
-    // const eventosIndicesActivos = await geEventosActivosIndiceFrontend();
-    // console.info(eventosIndicesActivos);
+    const eventosIndicesActivos = await geEventosActivosIndiceFrontend();
+    console.info(eventosIndicesActivos);
 
 
     // const eventosActivosDetallados = await geEventosActivosJsonFrontend();
@@ -224,14 +224,14 @@ async function main() {
 
 
 
-
+    return eventosIndicesActivos;
 
 }
 
 
 main();
 
-export default { crearEvento, comprarBoleto };
+export default { crearEvento, comprarBoleto, main };
 
 /**
  * await comprarBoleto(1);
