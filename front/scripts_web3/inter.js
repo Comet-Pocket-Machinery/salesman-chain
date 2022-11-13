@@ -111,19 +111,53 @@ async function getCantidadEventos() {
     return ;
 }
 
+
+
+
+
+
+async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket){
+    message1 =   await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
+    return message1;
+}
+
+async function getTodosLosEventosFrontend(){
+     message1 = await eventosContract.methods.getTodosLosEventos().call();
+     return message1;
+}
+async function getBoletosRestantesPorUsuarioFrontend(id_evento){
+    message1 =  await eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
+
+    return message1;
+}
+
+async function getBoletosRestantesDelEvento(indiceDelEvento){
+    const message2 = await eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
+    return message2;
+}
+
+
+async function geEventosActivosJsonFrontend(){
+    const message2 = await eventosContract.methods.geEventosActivos1().call();
+    return message2;
+
+}
+
+
+async function geEventosActivosIndiceFrontend(){
+    const message2 = await eventosContract.methods.geEventosActivos1().call();
+    return message2;
+}
+
+async function comprarBoletoDesdeFrontend(indiceDelEvento){
+    await comprarBoleto(indiceDelEvento);
+}
+
+
+
 async function main() {
-    //  await crearEvento(42, "miky", 1857738793, 1);
 
-    // const message1 = await eventosContract.methods.getTodosLosEventos().call();
-    // console.log("The message is: " + message1[0]);
-    await comprarBoleto(0);
 
-    //  const message2 = await eventosContract.methods.getBoletosRestantesPorUsuario(0).call();
-    //  const message2 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
-
-    // console.log("The message is: " + message2);
-
-    console.info(message2);
 
 
 
@@ -132,4 +166,15 @@ async function main() {
 
 
 main();
+
+
+
+/**
+ * await comprarBoleto(1);
+ * crearEvento
+ * 
+ */
+
+
+// no funcionando
 
