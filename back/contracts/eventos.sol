@@ -2,7 +2,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 pragma solidity ^0.8.17;
 
 //SPDX-License-Identifier: MIT
-contract Coches {
+contract eventos {
     struct Evento{
         uint256 identificadorEvento;
         address organizador;
