@@ -158,7 +158,7 @@ async function getCantidadEventosFrontend() {
 
 
 
-async function main() {
+export async function main() {
     const crearEvento = await crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
 
 
@@ -194,14 +194,14 @@ async function main() {
 
 
 
-
+    return eventosIndicesActivos;
 
 }
 
 
 main();
 
-export default { crearEvento, comprarBoleto };
+export default { crearEvento, comprarBoleto, main };
 
 /**
  * await comprarBoleto(1);
