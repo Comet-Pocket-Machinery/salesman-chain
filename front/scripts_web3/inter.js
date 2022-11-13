@@ -73,6 +73,46 @@ async function comprarBoleto(id_evento) {
     });
 }
 
+///getBoletosRestantesPorUsuario
+async function getBoletosRestantesPorUsuario(id_evento) {
+    const message1 = await eventosContract.methods.getBoletosRestantesPorUsuario().call();
+    console.log("The message is: " + message1);
+
+    await crearEvento(42, "miky", 188630, 1);
+
+    const message2 = await eventosContract.methods.getBoletosRestantesPorUsuario().call();
+    console.log("The message is: " + message2);
+
+    return ;
+
+
+}
+
+///getBoletosCompradosPorUsuarioContador
+async function getBoletosCompradosPorUsuarioContador() {
+    const message1 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
+    console.log("The message is: " + message1);
+
+    await crearEvento(42, "miky", 188630, 1);
+
+    const message2 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
+    console.log("The message is: " + message2);
+
+    return ;
+}
+
+///getCantidadEventos()
+async function getCantidadEventos() {
+    const message1 = await eventosContract.methods.getCantidadEventos().call();
+    console.log("The message is: " + message1);
+
+    await crearEvento(42, "miky", 188630, 1);
+
+    const message2 = await eventosContract.methods.getCantidadEventos().call();
+    console.log("The message is: " + message2);
+
+    return ;
+}
 
 async function main() {
     const message1 = await eventosContract.methods.getCantidadEventos().call();
@@ -82,6 +122,10 @@ async function main() {
 
     const message2 = await eventosContract.methods.getCantidadEventos().call();
     console.log("The message is: " + message2);
+
+
 }
 
+
 main();
+
