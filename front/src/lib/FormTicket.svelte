@@ -10,6 +10,9 @@
 	let selected;
 
 	let answer = '';
+  function tosend() {
+    comprarBoleto(questions.id)
+  }
 </script>
 <style>
   .card{
@@ -48,7 +51,6 @@ border: transparent;
 			</option>
 		{/each}
 	</select><br>
-  
 
   <div>
 <button on:click="{comprarBoleto}">

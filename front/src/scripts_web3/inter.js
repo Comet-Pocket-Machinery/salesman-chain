@@ -174,8 +174,8 @@ async function main() {
     // const getCantidadDeEventosTotal = await getCantidadEventosFrontend();
     // console.info(getCantidadDeEventosTotal);
 
-    // const eventosIndicesActivos = await geEventosActivosIndiceFrontend();
-    // console.info(eventosIndicesActivos);
+    const eventosIndicesActivos = await geEventosActivosIndiceFrontend();
+    console.info(eventosIndicesActivos);
 
 
     // const eventosActivosDetallados = await geEventosActivosJsonFrontend();
