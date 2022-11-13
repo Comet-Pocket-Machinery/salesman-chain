@@ -1,4 +1,5 @@
 <script>
+  import {comprarBoleto,main}from "../scripts_web3/inter.js";
   	let questions = [
 		{ id: 1, text: `Pal norte` },
 		{ id: 2, text: `X next` },
@@ -9,6 +10,9 @@
 	let selected;
 
 	let answer = '';
+  function tosend() {
+    comprarBoleto(questions.id)
+  }
 </script>
 <style>
   .card{
@@ -47,10 +51,9 @@ border: transparent;
 			</option>
 		{/each}
 	</select><br>
-  
-  <input type="number" placeholder="Amount to buy"><br>
+
   <div>
-<button>
+<button on:click="{comprarBoleto}">
   Buy
 </button>
 </div>
