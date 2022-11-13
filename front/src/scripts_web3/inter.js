@@ -28,18 +28,26 @@ export async function crearEvento(boletosACrear, nombreEvento, fechaEvento, prec
     };
 
     // Sign the transaction
-    const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
-    signPromise.then((signedTx) => {
-        web3.eth.sendSignedTransaction(signedTx.rawTransaction, function (err, hash) {
-            if (!err) {
-                console.log("The hash of your transaction is: ", hash);
-            } else {
-                console.log("Something went wrong when submitting your transaction:", err)
-            }
+    try {
+        const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
+        signPromise.then((signedTx) => {
+            web3.eth.sendSignedTransaction(signedTx.rawTransaction, function (err, hash) {
+                if (!err) {
+                    console.log("The hash of your transaction is: ", hash);
+                } else {
+                    console.log("Something went wrong when submitting your transaction:", err)
+                }
+            });
+        }).catch((err) => {
+            console.log("Promise failed:", err);
         });
-    }).catch((err) => {
-        console.log("Promise failed:", err);
-    });
+    } catch (err) {
+        return {
+            "status": 500,
+            "message": err
+        };
+    }
+    return { "status": 200, "message": "success" };
 }
 
 export async function comprarBoleto(id_evento) {
@@ -54,59 +62,81 @@ export async function comprarBoleto(id_evento) {
     };
 
     // Sign the transaction
-    const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
-    signPromise.then((signedTx) => {
-        web3.eth.sendSignedTransaction(signedTx.rawTransaction, function (err, hash) {
-            if (!err) {
-                console.log("The hash of your transaction is: ", hash);
-            } else {
-                console.log("Something went wrong when submitting your transaction:", err)
-            }
+    try {
+        const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
+        signPromise.then((signedTx) => {
+            web3.eth.sendSignedTransaction(signedTx.rawTransaction, function (err, hash) {
+                if (!err) {
+                    console.log("The hash of your transaction is: ", hash);
+                } else {
+                    console.log("Something went wrong when submitting your transaction:", err)
+                }
+            });
+        }).catch((err) => {
+            console.log("Promise failed:", err);
         });
-    }).catch((err) => {
-        console.log("Promise failed:", err);
-    });
+    } catch (err) {
+        return {
+            "status": 500,
+            "message": err
+        };
+    }
+    return { "status": 200, "message": "success" };
 }
 
 ///getBoletosRestantesPorUsuario
 async function getBoletosRestantesPorUsuario(id_evento) {
-    const message1 = await eventosContract.methods.getBoletosRestantesPorUsuario().call();
-    console.log("The message is: " + message1);
-
-    await crearEvento(42, "miky", 188630, 1);
-
-    const message2 = await eventosContract.methods.getBoletosRestantesPorUsuario().call();
-    console.log("The message is: " + message2);
-
-    return;
-
+    try {
+        const message1 = await eventosContract.methods.getBoletosRestantesPorUsuario().call();
+        return {
+            "status": 200,
+            "messagge": "success",
+            "response": message1
+        };
+    } catch (err) {
+        return {
+            "status": 401,
+            "message": err
+        };
+    }
 
 }
 
 ///getBoletosCompradosPorUsuarioContador
 async function getBoletosCompradosPorUsuarioContador() {
-    const message1 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
-    console.log("The message is: " + message1);
-
-    await crearEvento(42, "miky", 188630, 1);
-
-    const message2 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
-    console.log("The message is: " + message2);
+    try {
+        const message1 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
+        return {
+            "status": 200,
+            "messagge": "success",
+            "response": message1
+        };
+    } catch (err) {
+        return {
+            "status": 401,
+            "message": err
+        };
+    }
 
     return;
 }
 
 ///getCantidadEventos()
 async function getCantidadEventos() {
-    const message1 = await eventosContract.methods.getCantidadEventos().call();
-    console.log("The message is: " + message1);
+    try {
+        const message1 = await eventosContract.methods.getCantidadEventos().call();
+        return {
+            "status": 200,
+            "messagge": "success",
+            "response": message1
+        };
+    } catch (err) {
+        return {
+            "status": 401,
+            "message": err
+        };
+    }
 
-    await crearEvento(42, "miky", 188630, 1);
-
-    const message2 = await eventosContract.methods.getCantidadEventos().call();
-    console.log("The message is: " + message2);
-
-    return;
 }
 
 
