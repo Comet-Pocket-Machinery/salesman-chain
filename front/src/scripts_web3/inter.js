@@ -111,19 +111,62 @@ async function getCantidadEventos() {
     return ;
 }
 
+
+
+
+
+
+async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket) {
+    await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
+}
+
+async function getTodosLosEventosFrontend() {
+    const message1 = eventosContract.methods.getTodosLosEventos().call();
+    await message1;
+    return message1;
+}
+async function getBoletosRestantesPorUsuarioFrontend(id_evento) {
+    const message1 = await eventosContract.methods.getBoletosRestantesPorUsuario(id_evento).call();
+
+    return message1;
+}
+
+async function getBoletosRestantesDelEventoFrontend(indiceDelEvento) {
+    const message2 = await eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
+    return message2;
+}
+
+
+async function geEventosActivosJsonFrontend() {
+    const message2 = await eventosContract.methods.geEventosActivos1().call();
+    return message2;
+
+}
+
+
+async function geEventosActivosIndiceFrontend() {
+    const message2 = await eventosContract.methods.geEventosActivos1().call();
+    return message2;
+}
+
+async function comprarBoletoDesdeFrontend(indiceDelEvento) {
+    await comprarBoleto(indiceDelEvento);
+}
+
+async function getCantidadEventosFrontend() {
+    return eventosContract.methods.getCantidadEventos().call();
+
+}
+
+
+
+
 async function main() {
-    //  await crearEvento(42, "miky", 1857738793, 1);
 
-    // const message1 = await eventosContract.methods.getTodosLosEventos().call();
-    // console.log("The message is: " + message1[0]);
-    await comprarBoleto(0);
+    const somethin = await getCantidadEventosFrontend();
+    console.info(somethin);
 
-    //  const message2 = await eventosContract.methods.getBoletosRestantesPorUsuario(0).call();
-    //  const message2 = await eventosContract.methods.getBoletosCompradosPorUsuarioContador().call();
 
-    // console.log("The message is: " + message2);
-
-    console.info(message2);
 
 
 
@@ -133,7 +176,6 @@ async function main() {
 
 main();
 
-
-
 export default { crearEvento, comprarBoleto };
+
 
