@@ -1,5 +1,6 @@
 <script>
-  import {comprarBoleto,main}from "../scripts_web3/inter.js";
+ // import {comprarBoleto,main}from "../scripts_web3/inter.js";
+
   	let questions = [
 		{ id: 1, text: `Pal norte` },
 		{ id: 2, text: `X next` },
