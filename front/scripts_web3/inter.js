@@ -117,12 +117,12 @@ async function getCantidadEventos() {
 
 
 async function crearEventoDesdeFrontend(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket){
-    message1 =   await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
-    return message1;
+      await crearEvento(numeroTickets, NombreEvento, TimeStamp, PrecioIndividualTicket);
 }
 
 async function getTodosLosEventosFrontend(){
-     message1 = await eventosContract.methods.getTodosLosEventos().call();
+     message1 = eventosContract.methods.getTodosLosEventos().call();
+     await message1;
      return message1;
 }
 async function getBoletosRestantesPorUsuarioFrontend(id_evento){
@@ -131,7 +131,7 @@ async function getBoletosRestantesPorUsuarioFrontend(id_evento){
     return message1;
 }
 
-async function getBoletosRestantesDelEvento(indiceDelEvento){
+async function getBoletosRestantesDelEventoFrontend(indiceDelEvento){
     const message2 = await eventosContract.methods.getBoletosRestantesDelEvento(indiceDelEvento).call();
     return message2;
 }
@@ -153,9 +153,18 @@ async function comprarBoletoDesdeFrontend(indiceDelEvento){
     await comprarBoleto(indiceDelEvento);
 }
 
+async function getCantidadEventosFrontend(){
+   return  eventosContract.methods.getCantidadEventos().call();
+    
+}
+
+
 
 
 async function main() {
+
+    const somethin = await getCantidadEventosFrontend();
+    console.info(somethin);
 
 
 
