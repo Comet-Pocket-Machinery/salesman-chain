@@ -17,7 +17,7 @@ const eventosContract = new web3.eth.Contract(contract.abi, CONTRACT_ADDRESS);
 
 
 
-async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto) {
+export async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
     const gasEstimate = await eventosContract.methods.crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBoleto).estimateGas(); // estimate gas
     const tx = {
@@ -44,7 +44,7 @@ async function crearEvento(boletosACrear, nombreEvento, fechaEvento, precioBolet
     });
 }
 
-async function comprarBoleto(id_evento) {
+export async function comprarBoleto(id_evento) {
     const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); // get latest nonce
     const gasEstimate = await eventosContract.methods.comprarBoleto(id_evento).estimateGas(); // estimate gas
     const tx = {
@@ -132,4 +132,8 @@ async function main() {
 
 
 main();
+
+
+
+export default { crearEvento, comprarBoleto };
 
